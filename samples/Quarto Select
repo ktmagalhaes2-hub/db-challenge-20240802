@@ -1,0 +1,24 @@
+SELECT
+    s.store_name AS Nome_Loja,
+        b.brand_name AS Nome_Marca,
+            SUM(oi.quantity) AS Total_Itens_Vendidos
+            FROM
+                stores AS s
+                JOIN
+                    orders AS o 
+                        ON s.store_id = o.store_id
+                        JOIN
+                            order_items AS oi
+                                ON o.order_id = oi.order_id
+                                JOIN
+                                    products AS p
+                                        ON oi.product_id = p.product_id
+                                        JOIN
+                                            brands AS b
+                                                ON p.brand_id = b.brand_id
+                                                GROUP BY
+                                                    s.store_name,
+                                                        b.brand_name
+                                                        ORDER BY
+                                                            s.store_name, 
+                                                                Total_Itens_Vendidos DESC;

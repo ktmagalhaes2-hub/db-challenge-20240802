@@ -1,0 +1,14 @@
+SELECT
+    staff_id,
+        first_name,
+            last_name,
+                email
+                FROM
+                    staffs
+                    WHERE
+                        staff_id NOT IN (
+                                    SELECT DISTINCT staff_id
+                                            FROM orders
+                        );
+                        )
+                        
